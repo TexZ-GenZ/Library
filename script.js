@@ -1,15 +1,18 @@
 const container = document.querySelector(".container");
 
-function addBookToLibrary() {
-  const newBook = new Book();
-  newBook.title = "Mango";
-  newBook.authorName = "Apple";
-  newBook.genre = "Apple";
-  newBook.numberOfPages = 123;
-  newBook.readStatus = false;
+function Book(title, authorName, genre, numberOfPages, readStatus) {
+  this.title = title;
+  this.authorName = authorName;
+  this.genre = genre;
+  this.numberOfPages = numberOfPages;
+  this.readStatus = readStatus;
+}
 
-  myLibrary.push(newBook);
-  newBook.setIndex(myLibrary);
+const myLibrary = [];
+
+
+function addBookToLibrary(newBook) {
+  console.log(newBook);
 
   const tempBookContainer = document.createElement("div");
   tempBookContainer.classList.add("bookContainer");
@@ -35,7 +38,7 @@ function addBookToLibrary() {
   const buttons = document.createElement("div");
   buttons.classList.add("buttons");
 
-  const askReadStatus = document.createElement('h4');
+  const askReadStatus = document.createElement("h4");
   askReadStatus.textContent = "Have you read :";
   buttons.appendChild(askReadStatus);
   const readStatus = document.createElement("button");
@@ -59,63 +62,67 @@ function addBookToLibrary() {
   buttons.appendChild(deleteButton);
   tempBookContainer.appendChild(buttons);
   container.appendChild(tempBookContainer);
-}
 
-function Book(title, authorName, genre, numberOfPages, readStatus) {
-  this.title = title;
-  this.authorName = authorName;
-  this.genre = genre;
-  this.numberOfPages = numberOfPages;
-  this.readStatus = readStatus;
-}
 
-const myLibrary = [];
-
-Book.prototype.setReadStatus = function () {
-  this.readStatus = !this.readStatus;
-};
-
-Book.prototype.setIndex = function (currentArray) {
-  this.index = currentArray.length - 1;
-};
-
-addBookToLibrary();
-addBookToLibrary();
-addBookToLibrary();
-addBookToLibrary();
-
-const readButtons = document.querySelectorAll(".readButton");
-
-readButtons.forEach((readButton) => {
-  readButton.addEventListener("click", () => {
-    const bookObject = readButton.parentElement.parentElement.attachObject;
-    console.log(bookObject);
-    if (bookObject.readStatus) {
-      readButton.style.backgroundColor = "red";
-      readButton.textContent = "No";
+  readStatus.addEventListener("click", () => {
+    if (newBook.readStatus) {
+      readStatus.style.backgroundColor = "red";
+      readStatus.textContent = "No";
     } else {
-      readButton.style.backgroundColor = "green";
-      readButton.textContent = "Yes";
+      readStatus.style.backgroundColor = "green";
+      readStatus.textContent = "Yes";
     }
-    bookObject.setReadStatus();
+    newBook.readStatus = !newBook.readStatus;
   });
-});
 
-const deleteButtons = document.querySelectorAll(".deleteButton");
-
-deleteButtons.forEach((deleteButton) => {
   deleteButton.addEventListener("click", () => {
-    const divElements = document.querySelectorAll(".bookContainer");
-    const toBeDeletedDiv = deleteButton.parentElement.parentElement;
-    const bookObject = deleteButton.parentElement.parentElement.attachObject;
-
-    const toBeDeletedDivIndex = bookObject.index;
-
-    divElements.forEach((divElement) => {
-      if (divElement == toBeDeletedDiv) {
-        myLibrary.splice(toBeDeletedDivIndex, 1);
-        container.removeChild(toBeDeletedDiv);
-      }
-    });
+    myLibrary.splice(newBook.index, 1);
+    container.removeChild(tempBookContainer);
   });
+
+}
+// ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+const dialogPopUp = document.querySelector("dialog");
+const addBook = document.querySelector(".addBook");
+
+addBook.addEventListener("click", () => {
+  dialogPopUp.showModal();
 });
+
+///////////////////////////////////////////////
+
+const bookForm = document.querySelector("#bookForm");
+
+bookForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const title = document.querySelector("#title").value;
+  const authorName = document.querySelector("#authorName").value;
+  const genre = document.querySelector("#genre").value;
+  const numberOfPages = document.querySelector("#numberOfPages").value;
+  const readStatus =
+    document.querySelector('input[name="readStatus"]:checked').value === "true";
+
+  const newBook = new Book(title, authorName, genre, numberOfPages, readStatus);
+  myLibrary.push(newBook);
+
+  addBookToLibrary(newBook);
+
+  dialogPopUp.close();
+  bookForm.reset();
+});
+
+/////////////////////////////////////////////////
+
+const cancelButton = document.querySelector(".cancelButton");
+cancelButton.addEventListener("click", () => {
+  dialogPopUp.close();
+});
+
+//////////////////////////////////////////////////////////
+
+const harryPotter = new Book('Harry Potter','Jason', 'fiction' , 1611, true);
+addBookToLibrary(harryPotter);
+const richDadPoorDad = new Book('Rich Dad, Poor Dad','Ellion Bert', 'Inspirational, Reality' , 772 , true);
+addBookToLibrary(richDadPoorDad);

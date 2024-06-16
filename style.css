@@ -50,10 +50,14 @@
     html,body{
         height: 100%;
         font-family: Roboto, sans-serif;
+        background-color:  #010409;
     }
   h1{
     text-align: center;
     margin: 2rem;
+    color: rgb(0, 179, 255);
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 1rem;
   }
 
   .container{
@@ -61,18 +65,45 @@
     display: grid;
     grid-template-columns: repeat(auto-fit,350px);
     grid-auto-flow: row;
-    gap: 1.5rem;
+    gap: 38px;
   }
   .container > div{
-  border: 2px solid black;
+  
     min-height: 280px;
     max-height: 300px;
+    border-radius: 20px;
+     color: rgb(213, 213, 213);
   }
 
+  .addBook{
+    display: flex;
+    background-color:#30363d;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(31, 90, 153);
+    box-shadow: 0 0 15px rgb(88, 118, 150);
+    
+  }
+  .addBook:hover{
+    background-color: rgb(36, 34, 34);
+    scale: 1.02;
+    opacity: 0.4;
+  }
+  .addBook>img{
+    width: 3rem;
+  }
+
+
   .bookContainer{
+    border: 2px solid rgb(146, 27, 110);
+    box-shadow: 0 0 15px rgb(145, 33, 112);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: #0d1117;
+  }
+  .bookContainer:hover{
+    scale: 1.02;
   }
 
   .bookContainer > *{
@@ -88,9 +119,16 @@
   .buttons > h4{
     width: max-content;
   }
+  .buttons > button{
+     border: 2px solid rgb(255, 255, 255);
+  }
+  .buttons > button:hover{
+    scale: 1.05;
+  }
   .bookContainer > .buttons > button:nth-child(2){
     padding-left: 5px;
     border-radius: 20px;
+    margin-left: 20px;
   }
   .bookContainer > .buttons > button:nth-child(3){
   margin-left: auto;
@@ -104,4 +142,30 @@
   }
   .bookContainer >h2:nth-child(4){
     margin-bottom: 20px;
+  }
+
+  dialog{
+    margin:auto;
+    background-color:rgb(31, 90, 153);
+    border: 2px solid white;
+  }
+  dialog > h1{
+    color: #010409;
+  }
+  dialog>button{
+    border: 0;
+  }
+
+  dialog::backdrop {
+    background-color: #010409;
+    opacity: 0.85;
+    filter: blur(10px);
+  }
+
+  #bookForm{
+    display: flex;
+    flex-direction: column;
+  }
+  .cancelButton{
+    margin-top: 1rem;
   }
