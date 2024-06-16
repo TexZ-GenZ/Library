@@ -1,0 +1,107 @@
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  /*
+    2. Remove default margin
+  */
+  * {
+    margin: 0;
+  }
+  /*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  /*
+    5. Improve media defaults
+  */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  /*
+    6. Remove built-in form typography styles
+  */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  /*
+    7. Avoid text overflows
+  */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  /*
+    8. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }
+
+  /* Code Starts */
+
+    html,body{
+        height: 100%;
+        font-family: Roboto, sans-serif;
+    }
+  h1{
+    text-align: center;
+    margin: 2rem;
+  }
+
+  .container{
+    margin: 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,350px);
+    grid-auto-flow: row;
+    gap: 1.5rem;
+  }
+  .container > div{
+  border: 2px solid black;
+    min-height: 280px;
+    max-height: 300px;
+  }
+
+  .bookContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bookContainer > *{
+    margin: 0;
+    padding-left: 20px;
+  }
+  .bookContainer > .buttons{
+    width: 100%;
+    display: flex;
+    padding-left: 20px;
+    justify-content: flex-start;
+  }
+  .buttons > h4{
+    width: max-content;
+  }
+  .bookContainer > .buttons > button:nth-child(2){
+    padding-left: 5px;
+    border-radius: 20px;
+  }
+  .bookContainer > .buttons > button:nth-child(3){
+  margin-left: auto;
+  margin-right: auto;
+    width: 4rem;
+    border-radius: 12px;
+  }
+
+  .bookContainer > h1{
+    margin-bottom: 20px;
+  }
+  .bookContainer >h2:nth-child(4){
+    margin-bottom: 20px;
+  }
