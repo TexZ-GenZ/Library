@@ -1,11 +1,14 @@
 const container = document.querySelector(".container");
 
-function Book(title, authorName, genre, numberOfPages, readStatus) {
+class Book {
+  constructor(title, authorName, genre, numberOfPages, readStatus){
   this.title = title;
   this.authorName = authorName;
   this.genre = genre;
   this.numberOfPages = numberOfPages;
   this.readStatus = readStatus;
+  }
+  
 }
 
 const myLibrary = [];
